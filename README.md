@@ -239,7 +239,7 @@ docker compose up --build -d
 Visit:
 
 - `http://localhost:8080` (static site)
-- `http://localhost:5000` (API)
+- `http://localhost:5001` (API)
 
 ---
 
