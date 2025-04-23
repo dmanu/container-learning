@@ -92,16 +92,28 @@ You can use your favourite text editor (e.g. vi or nano) or use the command:
 ```bash
 echo 'FROM nginx:alpine\n\rCOPY . /usr/share/nginx/html' > Dockerfile
 ```
+Please use a text editor (e.g. vi or nano) to create and edit files for the remainder of this tutorial. For example:
+
+```bash
+nano Dockerfile
+```
 
 This Dockerfile tells Docker to use the `nginx` web server and copy your `index.html` into its web directory.
 
-### 3.3 Build the image
+### 3.3 Build the image`
+
+Build the image.
+
 ```bash
 docker build -t static-site .
 ```
 You’ll see step-by-step logs. At the end:
 ```
 Successfully tagged static-site:latest
+```
+Or at the top:
+```
+(X/X) FINISHED
 ```
 
 ### 3.4 Run the container
@@ -128,6 +140,12 @@ Pro tip:  you only need to specify the first 2 or so characters of the ID, not t
 ## Step 4: Convert to Docker Compose
 
 **Goal:** Use Docker Compose to define and run containers.
+
+If you are still in the static-site directory, return to the "docker-lab" parent directory by running:
+
+```bash
+cd ..
+```
 
 ### 4.1 Create `docker-compose.yml`
 ```yaml
@@ -199,6 +217,7 @@ CMD ["python", "app.py"]
 ---
 
 ## Step 6: Full Stack with Compose (Frontend + API + DB)
+Reminder to return to the docker-lab working directory for the next steps.
 
 ### 6.1 Update `docker-compose.yml`
 ```yaml
@@ -215,7 +234,7 @@ services:
   api:
     build: ./api
     ports:
-      - "5000:5000"
+      - "5001:5000"
     environment:
       - DB_HOST=db
 
@@ -239,7 +258,7 @@ docker compose up --build -d
 Visit:
 
 - `http://localhost:8080` (static site)
-- `http://localhost:5000` (API)
+- `http://localhost:5001` (API)
 
 ---
 
@@ -285,9 +304,22 @@ exit
 
 ---
 
-## Step 8: Monitoring with Prometheus and Grafana
+## Step 8: Clean Up
+```bash
+docker compose down -v
+```
+This stops and removes containers, networks, and volumes.
 
-### 8.1 Add Prometheus and Grafana
+---
+
+**You did it!** You now understand container basics, Dockerfiles, Compose, networks, volumes, APIs, databases, logging, privacy stacks, and VPNs. Let me know when you want this in a visual, polished format!
+
+---
+## Bonus Section - The below steps may offer inspiration for ways to further expand your use of Docker.
+
+## Bonus! Step 9: Monitoring with Prometheus and Grafana
+
+### 9.1 Add Prometheus and Grafana
 
 Add to `docker-compose.yml`:
 
@@ -331,9 +363,9 @@ Visit `http://localhost:3000`, log in with `admin/admin`.
 
 ---
 
-## Step 9: Privacy Tools Stack (Firefox + Torrent + VPN)
+## Bonus! Step 10: Privacy Tools Stack (Firefox + Torrent + VPN)
 
-### 9.1 Add services to Compose
+### 10.1 Add services to Compose
 ```yaml
   gluetun:
     image: qmcgaw/gluetun
@@ -375,9 +407,9 @@ Visit Firefox at `http://localhost:5800`, and qBittorrent at `http://localhost:8
 
 ---
 
-## Step 10: WireGuard VPN Server
+## Bonus! Step 11: WireGuard VPN Server
 
-### 10.1 Add WireGuard to Compose
+### 11.1 Add WireGuard to Compose
 ```yaml
   wireguard:
     image: linuxserver/wireguard
@@ -396,16 +428,4 @@ Visit Firefox at `http://localhost:5800`, and qBittorrent at `http://localhost:8
       - /lib/modules:/lib/modules
 ```
 Check logs for QR code to scan and connect.
-
----
-
-## Step 11: Clean Up
-```bash
-docker compose down -v
-```
-This stops and removes containers, networks, and volumes.
-
----
-
-**You did it!** You now understand container basics, Dockerfiles, Compose, networks, volumes, APIs, databases, logging, privacy stacks, and VPNs. Let me know when you want this in a visual, polished format!
 
