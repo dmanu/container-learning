@@ -312,7 +312,7 @@ This stops and removes containers, networks, and volumes.
 
 ---
 
-**You did it!** You now understand container basics, Dockerfiles, Compose, networks, volumes, APIs, databases, logging, privacy stacks, and VPNs. Let me know when you want this in a visual, polished format!
+**You did it!** You now understand container basics, Dockerfiles, Compose, networks, volumes, APIs, databases, logging, privacy stacks, and VPNs. 
 
 ---
 ## Bonus Section - The below steps may offer inspiration for ways to further expand your use of Docker.
